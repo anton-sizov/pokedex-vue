@@ -1,7 +1,6 @@
 <template>
     <div class="card">
-        <Bar class="bar-vertical" :options="chartOptions" :data="chartData"/>
-        <Bar class="bar-horizontal" :options="chartOptions" :data="chartDataY"/>
+        <Bar :options="chartOptions" :data="chartData"/>
     </div>
 </template>
 
@@ -14,7 +13,6 @@ import { PokemonDetails } from '../interfaces/pokemon-details.interface';
 ChartJS.register(Legend, BarElement, CategoryScale, LinearScale);
 
 const props = defineProps<{ pokemon: PokemonDetails }>();
-const windowWidth = ref(window.innerWidth);
 const chartOptions = ref({ responsive: true });
 const chartData = ref({
     labels: props.pokemon.stats.map(({ stat }) => stat.name),
@@ -24,18 +22,8 @@ const chartData = ref({
         data: props.pokemon.stats.map(({ base_stat }) => base_stat),
     }],
 });
-const chartDataY = ref({
-    labels: props.pokemon.stats.map(({ stat }) => stat.name),
-    datasets: [{
-        label: 'Stats',
-        backgroundColor: '#f87979',
-        data: props.pokemon.stats.map(({ base_stat }) => base_stat),
-    }],
-    indexAxis: 'y',
-});
 
 const handleResize = () => {
-    windowWidth.value = window.innerWidth;
     for (let id in ChartJS.instances) {
         ChartJS.instances[id].resize(0, 0);
     }
@@ -55,18 +43,5 @@ onUnmounted(() => {
     .card {
         padding: var(--card-gap);
         position: relative;
-    }
-
-    .bar-horizontal {
-        display: none !important;
-    }
-
-    @media only screen and (min-width: 1024px) {
-        .bar-horizontal {
-            display: block !important;
-        }
-        .bar-vertical {
-            display: none !important;
-        }
     }
 </style>
