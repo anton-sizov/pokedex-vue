@@ -5,12 +5,12 @@ const router = createRouter({
     history: createWebHistory(),
     routes: [
         {
-            path: '/',
+            path: '/pokedex-vue/',
             name: 'pokemons',
             component: PokemonsPageVue,
         },
         {
-            path: '/pokemon/:id',
+            path: '/pokedex-vue/pokemon/:id',
             name: 'pokemon',
             component: () => import('@pages/PokemonPage.vue'),
         },
