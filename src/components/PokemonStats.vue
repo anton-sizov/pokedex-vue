@@ -30,8 +30,8 @@ const chartDataY = ref({
         label: 'Stats',
         backgroundColor: '#f87979',
         data: props.pokemon.stats.map(({ base_stat }) => base_stat),
-        indexAxis: 'y',
     }],
+    indexAxis: 'y',
 });
 
 const handleResize = () => {
