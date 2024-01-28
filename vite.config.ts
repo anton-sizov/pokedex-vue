@@ -4,7 +4,7 @@ import vue from '@vitejs/plugin-vue';
 import vuetify from 'vite-plugin-vuetify';
 
 // https://vitejs.dev/config/
-export default defineConfig(({ mode }) => ({
+export default defineConfig(() => ({
     base: '/pokedex-vue/',
     plugins: [
         vue(),
