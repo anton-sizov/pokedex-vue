@@ -12,8 +12,23 @@ export const usePokemonStore = defineStore('PokemonStore', () => {
     const details = ref<PokemonDetails>({} as PokemonDetails);
 
     function loadPokemons() {
-        axios.get('pokemon/').then(({ data }) => {
+        axios.get(`pokemon/?limit=${pagination.value.size}&offset=0`).then(({ data }) => {
             list.value = data.results;
+            total.value = data.count;
+        });
+    }
+
+    function loadMorePokemons() {
+        pagination.value = {
+            ...pagination.value,
+            page: pagination.value.page + 1,
+        };
+        const offset = pagination.value.page * pagination.value.size;
+        axios.get(`pokemon/?limit=${pagination.value.size}&offset=${offset}`).then(({ data }) => {
+            list.value = [
+                ...list.value,
+                ...data.results,
+            ];
             total.value = data.count;
         });
     }
@@ -62,6 +77,6 @@ export const usePokemonStore = defineStore('PokemonStore', () => {
         };
     }
 
-    return { list, total, pagination, details, loadPokemons, loadPokemonDetails };
+    return { list, total, pagination, details, loadPokemons, loadMorePokemons, loadPokemonDetails };
 });
 

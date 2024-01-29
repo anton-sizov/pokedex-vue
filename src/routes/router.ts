@@ -5,7 +5,7 @@ const router = createRouter({
     history: createWebHistory(),
     routes: [
         {
-            path: '/pokedex-vue/',
+            path: '/pokedex-vue',
             name: 'pokemons',
             component: PokemonsPageVue,
         },
