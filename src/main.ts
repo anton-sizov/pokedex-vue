@@ -19,3 +19,7 @@ createApp(App)
     .use(vuetify)
     .use(pinia)
     .mount('#app');
+
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('./service-worker.js');
+}
