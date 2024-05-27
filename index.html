@@ -10,5 +10,10 @@
     <div id="app"></div>
     <script type="module" src="/src/main.ts"></script>
     <!-- <script type="text/javascript" src="/src/service-worker.js"></script> -->
+    <script>
+      if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.register('pokedex-vue/service-worker.js');
+      }
+    </script>
   </body>
 </html>
